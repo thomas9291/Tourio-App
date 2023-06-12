@@ -1,5 +1,5 @@
 import dbConnect from "../../../db/connect";
-import Place from "../../../db/models/Places";
+import Place from "../../../db/models/Place";
 
 export default async function handler(request, response) {
   await dbConnect();
@@ -11,6 +11,7 @@ export default async function handler(request, response) {
   if (request.method === "POST") {
     try {
       const placeData = request.body;
+      console.log("placedata:", placeData);
       const place = new Place(placeData);
       await place.save();
       return response.status(201).json({ status: "Place created" });
